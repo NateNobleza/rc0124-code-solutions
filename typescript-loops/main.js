@@ -8,7 +8,7 @@
             getValues
  */
 function getNumbersToTen() {
-  let numbers = [];
+  const numbers = [];
   let currentNumber = 1;
   while (currentNumber < 10) {
     numbers.push(currentNumber);
@@ -18,7 +18,7 @@ function getNumbersToTen() {
 }
 console.log(getNumbersToTen(), 'numbers');
 function getEvenNumbersToTwenty() {
-  let evenNumbers = [];
+  const evenNumbers = [];
   let currentNumber = 2;
   while (currentNumber < 20) {
     evenNumbers.push(currentNumber);
@@ -30,7 +30,7 @@ console.log(getEvenNumbersToTwenty());
 function repeatWord(word, time) {
   let count = 1;
   let repeated = '';
-  while (count < 10) {
+  while (count < time) {
     repeated += word;
     count++;
   }
@@ -44,29 +44,29 @@ function logEachCharacter(string) {
 }
 console.log(logEachCharacter('nate'));
 function doubleAll(numbers) {
-  let doubled = [];
+  const doubled = [];
   for (let i = 0; i < numbers.length; i++) {
     doubled.push(numbers[i] * 2);
   }
   return doubled;
 }
 console.log(doubleAll([1, 4, 5, 6, 7]));
-let idk = {
+const idk = {
   name: 'nate',
   age: '28',
   hobby: 'keyboards',
 };
 function getKeys(object) {
-  let keys = [];
-  for (let key in object) {
+  const keys = [];
+  for (const key in object) {
     keys.push(key);
   }
   return keys;
 }
 console.log(getKeys(idk));
 function getValues(object) {
-  let values = [];
-  for (let key in object) {
+  const values = [];
+  for (const key in object) {
     values.push(object[key]);
   }
   return values;
