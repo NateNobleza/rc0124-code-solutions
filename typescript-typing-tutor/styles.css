@@ -1,0 +1,12 @@
+.current {
+  color: green;
+  text-decoration: underline black;
+}
+
+.correct {
+  color: green;
+}
+
+.incorrect {
+  color: red;
+}
