@@ -27,8 +27,8 @@ function App() {
           standard HTML
         </p>
         <p>
-          Q:2 React uses JXsS as a syntax extension for JavaScript to write
-          React components
+          Q:2 React uses JXS as a syntax extension for JavaScript to write React
+          components
         </p>
       </div>
       <p className="read-the-docs">
