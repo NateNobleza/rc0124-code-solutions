@@ -1,0 +1,26 @@
+.row {
+  display:flex;
+  justify-content: center;
+  margin: 0 auto;
+  border-color: red;
+}
+
+body{
+  background-color: rgb(121, 198, 228);
+}
+
+h1{
+  color: antiquewhite;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+   position: relative;
+  left: 700px;
+  top: 100px;
+}
+
+img{
+  width: 50%;
+   border-radius: 50%;
+  background-color: white;
+  max-width: 100%;
+  align-items: center;
+}
