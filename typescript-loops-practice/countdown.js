@@ -1,5 +1,9 @@
+"use strict";
 /* exported countdown */
 function countdown(number) {
-    for (var i = 10; i > 0; i--)
-        return number[i];
+    const result = [];
+    for (let i = number; i >= 0; i--) {
+        result.push(i);
+    }
+    return result;
 }
