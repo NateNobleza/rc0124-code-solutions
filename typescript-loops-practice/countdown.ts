@@ -1,6 +1,8 @@
 /* exported countdown */
-function countdown(number: number[]): number{
-  for(let i = 10; i > 0; i--)
-  return number[i]
-
+function countdown(number: number): number[] {
+    const result: number[] = [];
+    for (let i = number; i >= 0; i--) {
+        result.push(i);
+    }
+    return result;
 }
