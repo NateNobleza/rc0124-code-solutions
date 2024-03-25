@@ -1,4 +1,4 @@
-interface BannerProps {
+type BannerProps= {
   currentItem: string;
 }
 

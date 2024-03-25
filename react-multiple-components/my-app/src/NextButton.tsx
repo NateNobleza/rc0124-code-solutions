@@ -1,3 +1,9 @@
-export default function NextButton() {
-  return <button>Next</button>;
+type PrevButtonProps = {
+  onClick: () => void;
 }
+
+function PrevButton({ onClick }: PrevButtonProps) {
+  return <button onClick={onClick}>Prev</button>;
+}
+
+export default PrevButton;
