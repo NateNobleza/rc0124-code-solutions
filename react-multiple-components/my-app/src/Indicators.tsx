@@ -1,7 +1,12 @@
-function Indicators({ itemCount, currentIndex }) {
+interface IndicatorsProps {
+  count: number;
+  currentIndex: number;
+}
+
+function Indicators({ count, currentIndex }: IndicatorsProps) {
   const indicatorButtons = [];
 
-  for (let i = 0; i < itemCount; i++) {
+  for (let i = 0; i < count; i++) {
     indicatorButtons.push(
       <button
         key={i}
