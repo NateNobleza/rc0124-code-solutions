@@ -1,9 +1,9 @@
 import RotatingBanner from './RotatingBanner';
 import './App.css';
 
-type prop = {
-  items: string[];
-}
+// type prop = {
+//   items: string[];
+// }
 
 function App() {
   const items = [
