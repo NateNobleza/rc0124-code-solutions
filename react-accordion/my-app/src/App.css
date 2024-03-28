@@ -1,0 +1,14 @@
+.topic-card {
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+.topic-title {
+  padding: 10px;
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+.topic-content {
+  padding: 10px;
+}
