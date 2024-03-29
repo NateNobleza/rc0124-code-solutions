@@ -1,0 +1,46 @@
+/* AppDrawer.css */
+
+.app-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 250px;
+  background-color: #fff;
+  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+  transition: width 0.3s ease;
+}
+
+.app-drawer.open {
+  width: 200px;
+}
+
+.drawer-toggle {
+  cursor: pointer;
+  padding: 10px;
+}
+
+.menu {
+  padding-top: 50px;
+}
+
+.menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.menu li {
+  margin-bottom: 10px;
+}
+
+.menu li a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #333;
+}
+
+.menu li a img {
+  width: 20px;
+  margin-right: 10px;
+}
