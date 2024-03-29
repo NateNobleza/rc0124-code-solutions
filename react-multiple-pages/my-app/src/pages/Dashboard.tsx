@@ -1,0 +1,66 @@
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Item, readItems } from '../lib/read';
+import './Dashboard.css';
+
+export function Dashboard() {
+  const [items, setItems] = useState<Item[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<unknown>();
+
+  useEffect(() => {
+    async function loadItems() {
+      try {
+        const values = await readItems();
+        setItems(values);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    loadItems();
+  }, []);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return (
+      <div>
+        Error! {error instanceof Error ? error.message : 'Unknown Error'}
+      </div>
+    );
+  }
+
+  return (
+    <div className="container">
+      <h1>Dashboard</h1>
+      <hr />
+      <div className="row">
+        {items.map((item) => (
+          <div key={item.itemId} className="col-12 col-md-6 col-lg-4">
+            {}
+            <Link
+              to={`/details/${item.itemId}`}
+              className="text-decoration-none">
+              <ItemCard item={item} />
+            </Link>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+type CardProps = {
+  item: Item;
+};
+function ItemCard({ item }: CardProps) {
+  return (
+    <div className="item card-body text-dark card mb-4 shadow-sm">
+      <h5 className="card-title">{item.name}</h5>
+    </div>
+  );
+}
