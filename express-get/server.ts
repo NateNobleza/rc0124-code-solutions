@@ -13,8 +13,6 @@ const db = new pg.Pool({
 
 const app = express();
 
-app.use(errorMiddleware);
-
 app.get('/api/films', async (req, res, next) => {
   try {
     // query to get the 2 films with the  highest replacement cost
@@ -52,6 +50,8 @@ app.get('/api/films/:filmId', async (req, res, next) => {
     next(error);
   }
 });
+
+app.use(errorMiddleware);
 
 app.listen(8080, () => {
   console.log('listening on port 8080');
