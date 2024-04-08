@@ -1,6 +1,7 @@
 import express from 'express';
 import pg from 'pg';
 import { errorMiddleware } from './lib/index.js';
+import { ClientError } from './lib/client-error.js';
 
 const db = new pg.Pool({
   connectionString: 'postgres://dev:dev@localhost/pagila',
@@ -24,16 +25,16 @@ app.get('/api/films', async (req, res, next) => {
     res.json(films);
   } catch (error) {
     console.error('error grabbing films', error);
-    res.status(500).json({ error: 'internal server error' });
     next(error);
   }
 });
 
-app.get('/api/films/:filmId', async (req, res) => {
+app.get('/api/films/:filmId', async (req, res, next) => {
   const filmId = req.params.filmId;
   // to check to see if filmID is an integer
   if (!Number.isInteger(+filmId)) {
-    return res.status(400).json({ error: 'Film ID needs to be an integer' });
+    const error = new ClientError(400, 'Film ID needs to be an integer');
+    return next(error);
   }
   try {
     // query to get the film by the ID
@@ -48,7 +49,7 @@ app.get('/api/films/:filmId', async (req, res) => {
     res.json(films);
   } catch (error) {
     console.error('error fetching film', error);
-    res.status(500).json({ error: 'internal server error' });
+    next(error);
   }
 });
 
