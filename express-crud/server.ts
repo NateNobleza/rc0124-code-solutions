@@ -36,11 +36,10 @@ app.get('/api/grades', async (req, res, next) => {
 app.get('/api/grades/:gradeId', async (req, res, next) => {
   const { gradeId } = req.params;
   //turns the string into a number
-const gradeIdAsNumber = parseInt(gradeId);
-  // Check if gradeId is not a number
-  if (isNaN(gradeIdAsNumber)) {
-    throw new ClientError(400, 'Grade ID must be a number');
 
+  // Check if gradeId is not a number
+  if (!Number.isInteger(+gradeId)) {
+    throw new ClientError(400, 'Grade ID must be a number');
   } else {
     try {
       const result = await db.query(
@@ -58,13 +57,11 @@ const gradeIdAsNumber = parseInt(gradeId);
   }
 });
 
-
 // PUT grade
 app.put('/api/grades/:gradeId', async (req, res, next) => {
   const { gradeId } = req.params;
   const { name, course, score } = req.body;
   try {
-
     if (
       !name ||
       !course ||
@@ -98,9 +95,9 @@ app.delete('/api/grades/:gradeId', async (req, res, next) => {
     if (result.rowCount === 0) {
       throw new ClientError(404, `Grade with ID ${gradeId} not found`);
     }
-    res.sendStatus(204)
+    res.sendStatus(204);
   } catch (error) {
- next(error)
+    next(error);
   }
 });
 
