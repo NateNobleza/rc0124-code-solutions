@@ -28,28 +28,36 @@ app.get('/api/grades', async (req, res, next) => {
     const grades = result.rows;
     res.status(200).json(grades);
   } catch (error) {
-    next(new ClientError(500, 'failed to fetch grades'));
-
-  }
-});
-
-//GET grade ID
-app.get('/api/grades/:gradeId', async (req, res, next) => {
-  const { gradeId } = req.params;
-  try {
-    const result = await db.query(
-      'SELECT * FROM "grades" WHERE "gradeId" = $1',
-      [gradeId]
-    );
-    const grade = result.rows[0];
-    if (!grade) {
-      throw new ClientError(404, `Grade with ID ${gradeId} not found`);
-    }
-    res.status(200).json(grade);
-  } catch (error) {
     next(error);
   }
 });
+
+// GET grade by ID
+app.get('/api/grades/:gradeId', async (req, res, next) => {
+  const { gradeId } = req.params;
+  //turns the string into a number
+const gradeIdAsNumber = parseInt(gradeId);
+  // Check if gradeId is not a number
+  if (isNaN(gradeIdAsNumber)) {
+    throw new ClientError(400, 'Grade ID must be a number');
+
+  } else {
+    try {
+      const result = await db.query(
+        'SELECT * FROM "grades" WHERE "gradeId" = $1',
+        [gradeId]
+      );
+      const grade = result.rows[0];
+      if (!grade) {
+        throw new ClientError(404, `Grade with ID ${gradeId} not found`);
+      }
+      res.status(200).json(grade);
+    } catch (error) {
+      next(error);
+    }
+  }
+});
+
 
 // PUT grade
 app.put('/api/grades/:gradeId', async (req, res, next) => {
@@ -81,7 +89,7 @@ app.put('/api/grades/:gradeId', async (req, res, next) => {
   }
 });
 
-app.delete('/api/grades/:gradeId', async (req, res) => {
+app.delete('/api/grades/:gradeId', async (req, res, next) => {
   const { gradeId } = req.params;
   try {
     const result = await db.query('DELETE FROM "grades" WHERE "gradeId" = $1', [
@@ -90,13 +98,9 @@ app.delete('/api/grades/:gradeId', async (req, res) => {
     if (result.rowCount === 0) {
       throw new ClientError(404, `Grade with ID ${gradeId} not found`);
     }
-    res.status(204).send();
+    res.sendStatus(204)
   } catch (error) {
-    if (error instanceof ClientError) {
-      throw error;
-    } else {
-      throw new ClientError(500, 'Failed to delete grade');
-    }
+ next(error)
   }
 });
 
