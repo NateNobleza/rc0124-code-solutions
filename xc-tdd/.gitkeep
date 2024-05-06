@@ -1,0 +1,229 @@
+xc-tdd
+Test-Driven Development
+
+What is Test-Driven Development (TDD)?
+In the early days of software development, software was tested manually. Software companies employed many Quality Assurance (QA) testers whose job was to manually run the software through its paces, clicking on every button and widget. When they found a bug, they would write up a bug report with screen shots and the steps to reproduce it. These reports were delivered to the developers, who had to verify the bug, hunt through their code, and fix it. Often, in the course of fixing one bug, another bug would be introduced, so the entire manual testing had to be repeated. This repeat testing was referred to as "regression testing" since it might find bugs that had "regressed" or reappeared after being fixed in a previous testing cycle.
+
+Needless to say, this was a very laborious and time-consuming process. It was not uncommon for the number of QA testers to be a large fraction of the number of software developers. And in most cases, the testing time was approximately the same as the development time.
+
+Hoping to improve this situation, in 1997 Kent Beck introduced "JUnit", a tool that would allow a developer to test small "units" of Java code. The concept is that you call a function with known inputs and test that the function returns the expected output. For example, a function that adds two numbers might be called with the values 4 and 12 and tested to make sure it returns 16. Unit tests embody the aphorism that “All code is guilty until proven innocent.”
+
+Of all the innovations in software development that have occurred over my 30+ year career, which saw the introduction of object-oriented programming, runtime environments like Java, scripting languages like JavaScript, and delivery of software "over the air" rather than on disk, the one that has had the biggest impact on how I write and think about code is unit testing. With a good suite of tests, I have more confidence that my efforts to clean up and improve the code are not introducing new bugs, and I am more confident that the code I deliver to production works as intended.
+
+As unit testing started becoming ubiquitous, the question arose as to how to make the most of unit testing to improve programmer productivity. In 2001, Kent Beck introduced another innovation in software testing, which he called "Test-Driven Development" (or TDD). Test-Driven Development is a software development process where tests are written before the production code is written. When tests are initially written, they will fail because there is no code that implements the tested behavior. Production code is then written until the test passes.
+
+Note that the TDD process works extremely well for fixing bugs. Before fixing a bug, write a test that exposes the bug. That way, you are more confident you correctly understand the bug, and that your fix actually fixed the bug! (Before doing this, I can't count how many times I "fixed" a bug only to find that it still occurred in production!)
+
+TDD Process
+The Test-Driven Development process uses a 3-step repeating cycle:
+
+Red
+
+Write a test against the new behavior, ensuring that it fails (so the test is red)
+Green
+
+Write production code that fixes the test (so the test turns green)
+Refactor
+
+Clean up the code, keeping the tests green
+Red Phase
+In the Red phase you write a test against the behavior that you are about to implement. The test must fail. This guarantees that the test actually runs and that it correctly tests the code. Write only enough of the unit test for it to fail. That is, don't write a complete and full test for an entire feature, just write enough to test the next step in your implementation.
+
+As you write the test, you have the opportunity to examine the interface and determine exactly how you want the interface to work. Write the test how you would like to use the code as a client. Often the act of writing a test exposes shortcomings in your intended interface. This is a great time to fix those and produce a clean, simple interface.
+
+During this phase, do not worry about the implementation. A test that fails because the function doesn't exist is perfectly acceptable in this phase.
+
+The Red phase is the most important and differentiates TDD from the “Standard Process” where you write working code and then later add tests. With TDD, you write tests so you can know what production code to write.
+
+Green Phase
+In the Green phase you write production code. However, only write enough production code to make the failing unit test pass. Write a straightforward solution that makes the tests pass. Do not implement behavior that does not have a failing unit test!
+
+As you write code, you may discover better ways to structure the code, such as removing duplicate code. However, resist the temptation to make such changes until the Refactor phase. The goal in the Green phase is to simply get the tests to all pass, writing as little code as possible.
+
+Refactor Phase
+In the Refactor phase you improve the code quality. Change the code while keeping all tests green (e.g., remove duplicate code). During refactoring run the tests frequently, after every change, to make sure the refactoring did not change the code's behavior. This is the primary reason you do not make code improvements during the Green phase — you want to be able to run all the tests to ensure they still pass.
+
+After a few iterations, you will likely discover a simpler way to implement the code, or abstractions that can be made (such as introducing helper functions or classes), or design changes that could benefit the code quality. Make these changes during the Refactoring phase, without introducing new behavior. During this process, frequently make sure all existing tests pass. Since you have a comprehensive suite of tests, you can make implementation changes with confidence that your changes do not break existing behavior.
+
+At the end of the Refactor Phase the code should be clean and “professional.”
+
+Rules
+The Test-Driven Development process can be summarized by a few rules:
+
+You are not allowed to write any production code unless it is to make a failing unit test pass.
+You are not allowed to write any more of a unit test than is sufficient to fail; and compilation failures are failures.
+You are not allowed to write any more production code than is sufficient to pass the one failing unit test.
+You may only clean up code in the refactoring phase, after the tests are comprehensive and all passing, and then run tests frequently to ensure they still pass.
+TDD Example
+When Kent Beck first demonstrated Test-Driven Development in 2001, he used an example that has now become famous:
+
+Convert a decimal number to Roman numerals
+
+Symbols:
+
+I = 1
+V = 5
+X = 10
+L = 50
+C = 100
+D = 500
+M = 1000
+We will now do a walk-through of the first few steps of this example. (An excellent walkthrough of the entire example can be found in the Roman Numeral kata by Ray Sinnema, written in Java.)
+
+Create files roman.js and roman.test.js.
+
+Red Phase: Write the first test (convert 1 to Roman), which will fail.
+
+import { toRoman } from './roman.js';
+
+test('1 should be I', () => {
+  expect(toRoman(1)).toBe('I');
+});
+Green Phase: Write the simplest code that will pass:
+
+export function toRoman(decimal) {
+  return 'I';
+}
+Note that this code doesn’t do anything interesting! However, it’s the simplest code that makes the test pass.
+
+Refactor Phase: There's no obvious refactoring.
+
+Cycle back to Red Phase: Next test (convert 2 to Roman)
+
+test('2 should be II', () => {
+  expect(toRoman(2)).toBe('II');
+});
+Green Phase: Write the simplest code that will pass:
+
+export function toRoman(decimal) {
+  if (decimal === 2) {
+    return 'II';
+  } else {
+    return 'I';
+  }
+}
+Still nothing interesting! But it's still the simplest code that passes.
+
+Refactor Phase: Some opportunity for improvement is starting to appear, but it's not clear yet, so wait.
+
+Cycle back to Red Phase: Next test (convert 3 to Roman)
+
+test('3 should be III', () => {
+  expect(toRoman(3)).toBe('III');
+});
+Green Phase: Write the simplest code that will pass:
+
+export function toRoman(decimal) {
+  if (decimal === 3) {
+    return 'III';
+  } else if (decimal === 2) {
+    return 'II';
+  } else {
+    return 'I';
+  }
+}
+Refactor Phase: It is looking like we can convert the if/else blocks to a loop. Let's try that:
+
+function toRoman(decimal) {
+  let result = '';
+  for (let d = 0; d < decimal; d++) {
+    result += 'I';
+  }
+  return result;
+}
+Good, the tests still pass!
+
+Cycle back to Red Phase: Next test (convert 4 to Roman)
+
+test('4 should be IV', () => {
+  expect(toRoman(4)).toBe('IV');
+});
+Green Phase: Write the simplest code that will pass:
+
+function toRoman(decimal) {
+  let result = '';
+  if (decimal === 4) {
+    result += 'IV';
+  } else {
+    for (let d = 0; d < decimal; d++) {
+      result += 'I';
+    }
+  }
+  return result;
+}
+Refactor Phase: This code isn't pretty, but it's not clear yet what improvements should be made, so wait.
+
+Cycle back to Red Phase: Next test (convert 5 to Roman)
+
+test('5 should be V', () => {
+  expect(toRoman(5)).toBe('V');
+});
+Green Phase: Write the simplest code that will pass:
+
+function toRoman(decimal) {
+  let result = '';
+  if (decimal === 5) {
+    result = 'V';
+  } else if (decimal === 4) {
+    result += 'IV';
+  } else {
+    for (let d = 0; d < decimal; d++) {
+      result += 'I';
+    }
+  }
+  return result;
+}
+Refactor Phase: A pattern is starting to appear, but it's not obvious how to take advantage of it, so wait.
+
+Cycle back to Red Phase: Next test (convert 6 to Roman)
+
+test('6 should be VI', () => {
+  expect(toRoman(6)).toBe('VI');
+});
+Green Phase: Write the simplest code that will pass:
+
+function toRoman(decimal) {
+  let result = '';
+  if (decimal === 6) {
+    result = 'VI';
+  } else if (decimal === 5) {
+    result = 'V';
+  } else if (decimal === 4) {
+    result += 'IV';
+  } else {
+    for (let d = 0; d < decimal; d++) {
+      result += 'I';
+    }
+  }
+  return result;
+}
+It’s ugly, but now we see duplication and refactoring possibilities.
+
+Refactor Phase: Make use of the pattern we see emerging:
+
+function toRoman(decimal) {
+  let result = '';
+  let remainder = decimal;
+  if (remainder >= 5) {
+    result += 'V';
+    remainder -= 5;
+  } else if (remainder === 4) {
+    result += 'IV';
+    remainder -= 4;
+  }
+  for (let d = 0; d < remainder; d++) {
+    result += 'I';
+  }
+  return result;
+}
+Good, the tests all pass!
+
+And so on. Completion of the code is left as an exercise to the reader!
+
+Resources
+Further information on Test Driven Development include:
+
+Test-driven Development
+Roman Numeral kata by Ray Sinnema
+JavaScript TDD using Jest Tutorial
+Testing React Components extends testing and TDD to React Components using React Testing Library
