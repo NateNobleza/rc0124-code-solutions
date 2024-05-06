@@ -1,0 +1,42 @@
+Cloud-based Applications
+When Web applications were first introduced, they used a server to serve the page content and provide data through a backend API. (Node and Express were eventually introduced to support this architecture in the JavaScript environment.) This server ran in a data center with computers dedicated to running a single web application. Over time, data centers were built that could run servers for multiple web applications and/or multiple companies.
+
+Early in its infancy, Google chose to move from a single large computer running one web application server to a different architecture where many small computers are each running their own copy of the server. The web traffic is then routed to different servers. This made it easier and cheaper to scale the servers to handle more traffic. Other tech giants, like Amazon and Microsoft, soon followed suit.
+
+
+
+In the next iteration of this architecture, companies realized that computers were becoming more powerful and with the load distributed across multiple computers, each computer was able to run multiple servers for different web applications at the same time. And once this was possible, it became natural for these large tech giants to rent out parts of their data centers to other companies. This was the birth of Cloud Computing, where Cloud Providers such as Amazon Web Services (AWS) or Google Cloud Platform (GCP) rent out computation power and take care of all the maintenance, network, and scaling hassles. This model soon took over the web service business and now non-cloud data centers have essentially disappeared.
+
+Web Server Architecture
+For many years, the standard architecture for a web application has used 3 tiers: client, server, and database. The client (such as a web browser) makes requests to the server, which handles the request by making calls to the database and returning a response.
+
+
+
+This architecture served the web application community very well for many, many years. However, in today's Cloud Computing world it has a big disadvantage: it requires a server instance to be always running and available — even if it's not handling any traffic.
+
+Because a server must always be running, it can be a challenge to scale. How many servers do you need to have running at the same time? If you allocate too many, you have to pay for them even if they're not being fully utilized. And if they're allocated, the Cloud Provider cannot use them for anything else, even if they're not busy. This means the Cloud Provider cannot make the most efficient use of its resources, which limits the number of customers it can accommodate.
+
+This utilization problem has been a big challenge for both Cloud Computing providers and customers. Providers have tried shutting down servers that aren't taking much traffic and spinning them back up when traffic increases — but that still results in unutilized computers. So they tried using the same computer for multiple customers, moving traffic around to make the best use of the computers they have. This helps, but it is complex and can still result in delays as computers shift from one customer to another.
+
+Serverless Architecture
+To address these utilization issues, Cloud Providers introduced what is now referred to as "Serverless Computing". This began with Google's introduction of Google App Engine, which allowed developers to write code functions that would be executed by App Engine. No separate server was needed. This idea caught on and was developed further. Several years later, Amazon Web Services (AWS) ignited the use of functions with the introduction of Amazon Lambda. All Cloud Providers have since introduced similar features.
+
+With Amazon Lambda, you write each API endpoint handler as a separate function, called a "lambda function". You deploy your app as a collection of functions and AWS takes care of deciding how many of them to instantiate and when to call them. As traffic increases, AWS allocates more instances, as traffic decreases AWS removes instances. This approach allows AWS to handle scaling and only charge the customer based on their actual traffic. It maximizes AWS use of resources while minimizing the cost to the customer.
+
+
+
+The serverless architecture is very similar to a standard 3-tier architecture, except that instead of a single server in the backend tier, a collection of functions takes that role, with the Cloud Provider managing scaling and execution of those functions. Further, serverless functions are very similar to the functions that would be written in a standard server, such as Node/Express. You can think of API Gateway in the diagram as doing the work that Express does, and the Functions as your route handlers. But instead of writing a complete server and managing its deployment in the Cloud, you write just the functions and send them to the Cloud Provider to manage.
+
+Conclusion
+Serverless computing is becoming very popular because of its simplicity and its more efficient use of compute resources. Further, you are only charged for what you actually use, and the challenge of scaling is completely handled by the Cloud Provider instead of by the customer.
+
+With the rise in popularity of serverless route handlers, Cloud Providers have introduced additional services that follow a similar paradigm. For example, nosql databases allow multiple customers to share the same database resources; and Cloud Providers usually charge based on usage rather than charging to host a database server (such as PostgreSQL). AWS's nosql offering is AWS DynamoDb. Similarly, messaging and queueing systems are now available in serverless formats.
+
+New applications for both Web and Mobile applications are more and more often being written using Serverless Computing.
+
+Resources
+History of Serverless Computing
+Serverless Framework
+AWS Lambda
+Google Cloud Functions
+Azure Functions
