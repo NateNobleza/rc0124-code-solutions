@@ -1,0 +1,147 @@
+Clean Code
+There are 3 primary aspects to writing "clean code":
+
+Readability
+Testability
+Maintainability
+Readability refers to the ability to understand the code when reading it.
+
+Testability refers to how easily the code can be tested to ensure it functions properly (usually in the form of a Unit Test).
+
+Maintainability refers to how easy it is to fix bugs, add features, or adapt to changing dependencies.
+
+This presentation will focus on Readability.
+
+Readability
+Most code is written once and read many, many times (perhaps 100s of times). There is also a very good chance that one of those readers will be you, months after you wrote the code, when you are trying to enhance it, fix a bug, or add a feature! Therefore, making code readable should take priority over how long it takes to write the code.
+
+Strive to write code so that the reader can quickly and easily understand it. The code reader should be able to get a sense for what the code is doing by quickly scanning it, getting into line-by-line reading only to learn details.
+
+Many companies will have a style guide that should be followed when writing code. A common, publicly available style guide is the AirBnb Style Guide. Not all the recommendations there are universally applied or agreed upon, but it is a good start.
+
+Following are some suggestions on how to write readable code.
+
+Formatting
+Code should be consistently formatted to make it easier to read and understand.
+
+Each team will likely have its own conventions as to how code should be formatted. These days, there are automated formatters that will make the code look like you want it to. The most common is prettier, which does an excellent job of formatting the code and is highly recommended.
+
+Several years ago, it was in vogue to have the linter complain when your code was formatted incorrectly. With linters now running inside the code editor, this approach tends to get in the way and be distracting. The modern way to set up the formatter is to format the file whenever you save (most IDEs will do this for you automatically) and to not generate lint warnings or errors when the only thing wrong is the formatting. With these settings, formatting "just takes care of itself" and does not get in your way.
+
+Naming
+Good naming is probably the most important aspect of writing understandable code. Often, the name alone can indicate the purpose of a variable or function, while a poorly chosen name can confuse the reader.
+
+Here are some good naming practices:
+
+Apply naming conventions consistently across all your code
+Names should be descriptive but brief; long names increase the cognitive load on the reader
+Names should be distinctive in the first few letters (e.g., readFromDatabaseBook and readFromDatabaseChapter are harder to read than readBookFromDatabase and readChapterFromDatabase, while readBook and readChapter are even better)
+Variable and function names should use camelCase
+Global constants can use UPPER_SNAKE_CASE, though camelCase is also good — just be consistent
+Variable names are usually nouns or adjectives that describe the stored value and indicate its purpose (e.g., num is often a poor choice, while numBooks is better)
+Variable names should not (or rarely) encode the variable type (e.g., name is better than nameStr)
+Boolean variables often have an is or has prefix, especially if the meaning is unclear (e.g., isOpen is better than open since "open" can be either a verb or an adjective)
+Function names are usually verbs or verb phrases that describe what the function will do (e.g., readBook)
+Module names should be all lowercase or kebab-case and should indicate the broad category of items the module exports
+Differences when working in React:
+React component functions must use UpperCamelCase
+React component functions should be nouns that describe the component (e.g., BookDetails)
+Modules that export a single React component are often named with UpperCamelCase that matches the name of the component it exports
+Function and File Length
+In general, short functions and short files are easier to read and use than long ones.
+
+As a rule of thumb, a single function should not be longer than 20-30 lines. Note, however, that React component functions often get much longer due to the JSX and embedded functions. Try to keep the embedded functions short, about 5-10 lines, and the component function logic about 5-10 lines.
+
+If your functions are getting too long, extract some of the logic to new functions. A well-named function will aid readability even if that function is not reused by any other code.
+
+As a rule of thumb, modules (files) should not be longer than about 200 lines. If one is getting much larger than that, it is probably trying to do too much and might be split into several smaller modules.
+
+Code Structure
+The structure of code and files can provide a large aid to readability. Well structured code can be scanned to get an understanding of how it works. It can also make it easier to find the important "happy path" logic and the error handling logic.
+
+Single Purpose
+The most important thing to remember about functions and files is that they should serve one purpose. An ideal function does exactly one thing (such as reading an item from an API). An ideal module has exactly one purpose (such as interacting with an API). A Google readability expert claims that even a 5 line function can be too long if it is doing more than one thing in those 5 lines!
+
+Error Handling
+Robust code will "fail fast", meaning that it will catch errors quickly and fail rather than continuing. If there is an error condition in a function and it continues executing, a failure will likely occur later in the code, and finding the bug may be challenging. So always check for known error conditions early in a function and exit the function immediately (often by throwing an exception).
+
+It is tempting to code a sequence of if/else if/else if/else statements, where the early if/else blocks check for errors and the final else block handles the "happy path" where there are no errors. This makes it difficult to find the "happy path", and the code can easily become deeply nested, which makes it difficult to grasp how the code works. A better approach is to check for errors at the top of the function and return or throw if an error is detected.
+
+For example:
+
+// Bad
+function foo(param: InputType): OutputType {
+  if (param) {
+    if (!isValid(param)) {
+      throw new Error(`Invalid input in ${param}`);
+    } else {
+      // ... happy path
+    }
+  } else {
+    throw new Error('No parameter provided');
+  }
+}
+
+// Good
+function foo(param: InputType): OutputType {
+  if (!param) throw new Error('No parameter provided');
+  if (!isValid(param)) throw new Error(`Invalid input in ${param}`);
+  // ... happy path
+}
+Parameters
+The number of parameters in a function should be small, usually no more than 3, definitely not more than 5. If there are a large number of parameters, it is hard to read the code unless you have memorized the list of function parameters. It is also easy to get mixed up and pass parameters in the wrong order. Finally, it can be very challenging to modify a function by changing the order or number of parameters it takes.
+
+If a function just must have many parameters, combine them into an object and pass that object instead. This lets the caller name each of the parameters, and is especially useful if some of the properties are optional. For example:
+
+// Bad
+function foo(
+  name: string,
+  height: number,
+  hairColor?: string,
+  hairLength?: number
+): OutputType {}
+
+// Good
+type Options = {
+  name: string;
+  height: number;
+  hairColor?: string;
+  hairLength?: number;
+};
+function foo(options: Options): OutputType {}
+Such a function can be called as:
+
+foo({ name='Robert', height='73' });
+This approach is commonly used to pass configuration values and is also the approach taken for React component properties.
+
+Code Comments
+Often developers will believe that their code is so clear and understandable that it does not need comments. Many developers believe that code can be "self documenting", meaning that it is so clear and obvious that no comments are necessary. Both these types of developers are wrong. Code is almost never so clear and understandable that it is "self documenting" and doesn't need comments!
+
+Of course, there are functions whose names and parameters are so obvious that they do not need comments. For example, readBook(bookId: number): Book may be clear enough, in the context of the application being written, that it doesn't need extra documentation. But these cases are much more rare than it may seem!
+
+Functions should be commented in such a way that the caller does not have to read the code to figure out what it does. For example, does the function throw if a parameter is empty? If the only way to answer this question is to read the function code, then the commenting has failed.
+
+In general, it is best to comment every function, class, or variable exported from a module. Use JSDoc to comment these items. In the comment, clearly explain what the function does, what parameters it uses, what it returns, and what Errors it may throw. Here is an example:
+
+/**
+ * Reads a Book from the backend API given its `bookId`.
+ * @returns a Promise that resolves to the Book.
+ * @throws {Error} if the book doesn't exist.
+ */
+export async function readBook(bookId: number): Promise<Book> {
+  // ...
+}
+Private functions and items (i.e., those not exported) do not need to be commented if they are small and obvious, though it can be very helpful to include JSDoc comments on them, as well.
+
+Code logic within a function sometimes needs to be commented as well. These comments are often referred to as "implementation comments" because they document the implementation rather than the overall behavior. (Implementation comments do not use JSDoc).
+
+An implementation comment will be most helpful if it explains why the code is written in a certain way. Implementation comments should not describe how the logic works because that can be deduced from reading the code (except in that rare case where there is something especially tricky about it). The person reading the code usually wants to know why a particular approach was taken, or what the overall goal of the logic is.
+
+The implementation should also be documented if you had to think about it, or found a hard-to-spot bug with another code approach. If you had to think about it, then the chances are that the reader will also need to and will appreciate learning from your efforts. If a specific style of coding is required to avoid a bug, this should also be commented (for example, when setState((prev) => prev + 1) works but setState(state + 1) does not).
+
+Occasionally, lengthy documentation is required to make code clear and understandable. In that case, write a document outside of the code and include a link to that document in your code. (A markdown file in the project repo is a good way to do this.)
+
+Frequently when designing or implementing code you will consider multiple approaches before settling on one. Often the reasons for rejecting some of the approaches are not obvious. It is wise to document not only the approach that was taken, but also the approaches that were considered and rejected, along with why those approaches were rejected. This can help a future code maintainer avoid making an implementation choice without fully understanding the consequences.
+
+Conclusion
+Well written code is a delight to work with. Learning to write clean code will make your software development experience more enjoyable and satisfying. The ability to write clean code marks the difference between a beginner and an expert.
