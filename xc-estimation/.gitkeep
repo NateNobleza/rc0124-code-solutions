@@ -1,0 +1,82 @@
+Planning and Estimation
+Historically, a number of different techniques for managing project work have been used. One of the earliest approaches is now referred to as the "waterfall" model, because of the way that work "flows" from one team to another. In this model, the business team defines the product's business goals, the product team defines all the system requirements and then passes those to the design team, which generates the user interface and passes those to the engineering team for implementation. At each step the team turns over the work to the next team and moves on to another project.
+
+The waterfall model turned out to be very rigid and difficult to adapt to real-world development. Further, each team passing the work down to the next team often didn't understand the limitations and constraints of that next team, so they frequently made unreasonable demands. This made iteration on the requirements and design difficult, which often led to finger pointing as teams sought to blame the upstream team for delays and problems. As a result, software projects were frequently very long (typically one to three years) and were often very late, frequently doubling the estimated time to release.
+
+To address these concerns various efforts were created to produce a more iterative and collaborative design process, originally referred to as "Extreme Programming" but now broadly referred to as Agile methodologies.
+
+The key components of an Agile development process include:
+
+The requirements and design are known only vaguely upfront
+Requirements and design are iterated throughout development
+Members from each team (product, design, engineering) meet together frequently to discuss next steps
+Work is divided into small chunks (often called "sprints", typically 2 weeks long)
+Regular planning meetings are held to plan the next sprint
+Work performed in a sprint is "sold off" to stakeholders by demoing it end-to-end
+Agile methodologies result in an iterative process where problems are caught early and addressed, trade-offs are made as the work progresses, and the user experience evolves as the product moves toward completion. The net result is typically a better product, a more engaged work team, and an overall faster development time.
+
+The biggest problem with Agile methodologies, however, is estimating how long a product will take to complete or what it will cost, since the total amount of work required is not known upfront. Estimation is also required during the development process because teams need to be able to estimate how much work they will be able to accomplish in a single sprint.
+
+The estimation problem thus commonly raises its ugly head when using Agile methodologies.
+
+The Estimation Problem
+The estimation problem arises because humans are very bad at estimating how long something will take. (For example, how long will it take to remodel your house? Even professional contractors regularly misjudge.)
+
+Why is it hard?
+
+We fail to account for ramp-up time
+We fail to account for the unknown
+We fail to account for the unexpected
+We underestimate the cost of interruptions
+We underestimate the cost of meetings and coordination
+Most importantly, programmer productivity varies drastically, by as much as a factor of 20!
+Fortunately, though humans may be bad at estimating time, we are very good at comparing. So we can do a better job of estimating if instead of guessing how long something will take, we compare the current task to previous, similar tasks.
+
+Points
+Before we can compare tasks, we need a mechanism for measuring tasks. To aid in this, Agile methodologies have introduced the concept of "points".
+
+Points are arbitrary values used to measure the level of effort of a task. Points have no intrinsic meaning, but a task with points 2X should be roughly twice the effort of a task with points 1X. By convention, points are always assigned in Fibonacci numbers. These work well since the number grows significantly as the level of effort grows, which matches experience — the longer something takes the more uncertain the completion time.
+
+Points can be correlated to time only by measurement. Teams (and individuals) can correlate points to time by keeping track of how many points they complete in a given amount of time (typically a sprint).
+
+Comparing Tasks
+To get started with comparison-based estimation, you need something to compare against. So, keep a log of tasks (1-3 days in length) and how long they took (in calendar time). Add enough notes that you will remember what the task involved.
+
+From your logs, select representative "baseline" tasks of each following level of effort:
+
+Small (approximately 1 day)
+Medium (approximately twice the "small")
+Large (approximately twice the "medium")
+Label these baseline tasks with points of 1, 3, and 5.
+
+Now, when estimating a new project, first break it down into small or medium tasks. If it just cannot be broken down due to uncertainty, more research is required before the project should be accepted for work.
+
+Compare each task to the baselines. Assign the task the number of points of the one it most closely matches. If task is bigger than any of the baselines, break it down. In a team, this comparison and point assignment should be done by discussion and voting.
+
+Estimating Time to Completion
+If you are trying to estimate the amount of time a project will take to complete, using the list of tasks required to complete the project, sum up the points and round to the next higher Fibonacci number. This is the number of points the project should take.
+
+Once you know the points, you can determine the calendar time using your task log. From your log, determine how many points you can get done in one sprint. Use the result to calculate how many sprints your project will take. Report that value as the estimated time to completion.
+
+Note: If there is a lot of uncertainty or unknowns in the project, double the estimate before committing to it since it is better to under-promise and over-deliver than vice versa.
+
+Determining Workload for a Sprint
+Alternatively, if you are trying to determine how much work to commit to in a sprint, pick tasks until the points add up to the number of points you can get done in one sprint.
+
+When choosing among tasks, prioritize those that are on the critical path. This means those tasks that are blocking other tasks or are most likely to cause a delay in the overall project if they don't get finished. Once the tasks on the critical path are taken, select remaining tasks based on their priority (see below).
+
+Prioritizing Tasks
+It can often be difficult to decide which tasks to complete first. It is tempting to choose those that are the most interesting rather than the most important.
+
+A simple method for prioritizing tasks is to estimate two aspects of every task:
+
+The benefit (in dollars) of the completed task
+The cost (in points) to complete the task
+Make sure both estimates are numeric, using the same metric across all tasks. Then simply divide the benefit by the cost. Prioritize according to this ratio — those with the higher ratio should be done first. This way, high benefit tasks get completed first, though easy tasks with moderate benefit can bubble up and get done sooner.
+
+The benefit of this approach is that it delivers the highest benefit soonest, maximizing the total value that you (or your team) provides.
+
+Conclusion
+Using points and comparisons to estimate work effort generally leads to more accurate estimates. It is important, however, to keep a log of prior tasks, how many points they were assigned, and how long they took. This log can be used to refine point estimates and determine how many points a team can deliver in a sprint.
+
+Teams I have managed that have adopted this type of estimation and planning strategy have been more successful at delivering high value work on time.
