@@ -1,0 +1,98 @@
+Good Work Habits
+Success in a software development career will depend as much on your work habits as on your technical prowess. This presentation provides guidance on work habits that can help you be successful. It is based on my experiences at Google and elsewhere where I witnessed both habits that lead to success and some that lead to failure.
+
+Focus
+Focus on your task and don't get distracted by "interesting" problems. This is, surprisingly, one of the most common failures of budding software engineers. People who enter the software development business are typically curious, love to learn, and love technology. When working on a task, it is easy for such people to "go down a rabbit hole" pursuing technical knowledge. It can be tempting to think that such an investigation is necessary to complete the task, but this is rarely the case. Instead, learn just enough to complete the task, and then do the interesting "deep dive" later, in your spare time.
+
+Focus on Delivering
+When I was at Google I was starting up a new project (building analytics for Google Cloud Platform). While working on this, I kept finding documents from other teams describing competing ideas and projects. So I kept asking my director about these, wondering if we should still be working on this project. Finally, one day he said, "Robert, Google has numerous sharp engineers with big ideas who can write great documents. But what we need is people who can deliver. So stop worrying about everyone else and just deliver." I did that, the project was successful (it grew to 40 engineers), and this has now become my mantra: "Just deliver!"
+
+There are many important things to prioritize, but none is more important than delivering a quality product, on time. Sometimes everything else needs to take a back seat to this goal.
+
+Plan
+When working on a software problem, it is tempting to immediately jump into writing code. This is a common instinct for most beginning developers. However, this is a good way to write hundreds of lines of code that you later throw away! Instead, stop and consider how to solve the problem. Examine several alternatives and select the one that seems best for the task. Software is a game of trade-offs. There are dozens of ways to solve every problem — and every approach to solving the problem has pros and cons. The key is to identify those pros and cons, trade them off, and make a good choice. A little planning upfront will save hours of work and will produce a better result.
+
+A LearningFuze instructor (Tim Horist) has a humorous sticker on his laptop that has become one of my favorites: "Weeks of coding can save hours of planning!" This is especially humorous because we have all fallen into that trap! Successful engineers avoid that trap and plan before writing a single line of code. In fact, often the most expert, successful software engineers write the least amount of code, not because they are lazy, but because they think first and write code second, so the code they do write is the right code in the right place.
+
+Identify Unknowns
+Almost every software task involves unknowns, challenges, or roadblocks. (Those rare tasks that do not are sometimes referred to as SMOP — Simply a Matter Of Programming.)
+
+In your upfront planning, work hard to identify the unknowns, challenges, or potential roadblocks. Then work even harder to uncover the unknowns, to figure out how to deal with the challenges, and to identify the people who can get you through the roadblocks.
+
+Tackle Challenges First
+If there are serious challenges or roadblocks that could potentially stop completion of a project, tackle those first. This "fail fast" approach lets you decide early if the project is feasible. If it is not, it's best to find that out early before a lot has been invested in it.
+
+Identify Your Design Approach: Top down vs. Bottom up
+Over time, you will find that you have a preferred design approach. It will likely be one of two approaches:
+
+Top-down
+Bottom-up
+A top-down approach is one where you create the broad outline first, such as identifying architecture, modules, main functions, etc. Once you are satisfied with the broad, high level design, you drill down into the details. Often with a top-down approach you won't work out the details until you start development.
+
+A bottom-up approach is one where you first implement the details and then work upward to its callers, until you have an entire working system.
+
+For those of us who prefer the top-down approach, it can seem baffling that a bottom-up approach will ever work — for example, you may end up spending time figuring out details that turn out to be unnecessary, or the pieces end up not working together to solve the problem. However, knowing that there are people who work effectively bottom-up is important for communication and working together.
+
+Identify Your Development Approach: Depth First vs. Breadth First
+Over time, you will also discover your preferred approach to development and implementation. It will likely follow one of two approaches:
+
+Depth First
+Breadth First
+In a depth-first approach, you completely finish one function or feature before moving on to the next.
+
+In a breadth-first approach, you do a partial implementation of each function or feature, and then completely finish each one in turn. Typically, you would first write stub functions, and then focus on each function in turn: write the code and test, move to the next, and so on. Finally, go back and work on the polish.
+
+For example, when working on a React frontend, with a breadth-first approach you would create stub components that just layout their elements, with no functionality. Then you would build functionality across components, fleshing out parts of each component, iterating until you are done. With a depth-first approach, you would completely implement each component before moving on to the next.
+
+The advantage of a depth-first approach is that when you finish the final function or feature you are finished. The advantage of breadth-first is that you get all the basic functionality working so that you can use the product and make sure it meets your needs. Then you do the polish work. This keeps you from getting bogged down on fine details that may not be important or that may end up being changed, anyway.
+
+Develop Features End-to-End
+When your project involves a number of different features, it's best to implement a feature end-to-end (both frontend and backend) before moving on to the next feature. It is often best to implement and test the backend first, followed by the frontend. Once both frontend and backend are ready, demo it to a stakeholder to show that it works, and then move on to the next feature. This approach will make it more likely that you deliver a complete, working project, and allows stakeholders to easily track your progress.
+
+Time Management
+Good time management is critical to success. You need to spend as much time as possible doing productive work, and you need to learn to estimate how long tasks will take (the focus of a different presentation).
+
+Spend as much time working on the task as possible. This means you should minimize distractions, minimize meeting time, and minimize "goofing off" time. It is very important to take breaks and let your mind clear, but time box those breaks so that you get back to your task at the proper time. Set an alarm if necessary.
+
+Always Learn
+Continuous learning is among the top requirements of success. The software field changes so rapidly that it is easy to get behind and lose track of what is happening in the industry. Not only will your skills become outdated, but you may miss important advancements that could greatly improve your skills or productivity.
+
+Take time each week to learn something new about the software development industry. Read blogs, news feeds, or other sources to find out what is trending. If you find something particularly interesting or potentially impactful, take the time to study it in depth and even try it out, either on your own or in conjunction with a work project.
+
+Also, when you run into code or a system that is new to you, but you don't understand it, don't just use it blindly. Take the time to study it and figure out how it works. It won't be necessary to go into tremendous detail (such as reading the code), but articles or documentation about the system can be valuable.
+
+Ask For Help Wisely
+When should you ask for help? On the one hand, asking questions that you should have been able to answer yourself can make you look incompetent. On the other hand, getting stuck for hours on a problem that could be solved by talking to someone else can make you more productive. It can be difficult to find the right balance.
+
+As a rule of thumb, first try to find the answer yourself through your own research. Scan company sources, check articles and documentation, look on StackOverflow. However, don't spend more than 30-60 minutes blocked before seeking help.
+
+When you ask someone a question, if it is clear you have done your own research, it is unlikely they will look down on you for asking. On the contrary, they have most likely been there themselves, so they understand. They also want you to get up to speed quickly so you can contribute and reduce their own load. Many engineers also love mentoring others and are happy to help. So when you do ask, phrase the question as clearly and intelligently as possible, briefly identifying the research you have already done. This way, the person you ask can focus their response in a way that is of most help.
+
+However, keep in mind that when you ask someone for help you are taking them away from their task and affecting their productivity. So be mindful of their time. Before asking the question, ask them when they might have time to help. Or use asynchronous communication channels (such as Slack). Phrase your question as succinctly as possible, so it can be quickly read and understood. And if you do get help, be sure to thank them and to reciprocate in any way you can, either by helping them in the future or taking the time to help others when they come with questions.
+
+Maintain a Healthy Work/Life Balance
+Be sure to maintain a good work/life balance. Burn-out is a very common problem in the software industry. You are being paid to work 40 hours per week, but will most likely work 50 or 60. But don't go overboard. Head home when the workday is over and leave your work behind. Spend the weekends relaxing and doing non-work activities. This will keep your mind fresh and allow it to solve problems "in the background" while you are focusing on pleasant activities. It is amazing how frequently solutions come to mind the morning after a relaxing, distracting evening!
+
+Coordinate With Team Members
+Coordinating with your team members is critical. Software has grown to the point where one-person tasks and projects are almost unheard of. When coordinating with team members, over-communicate. Providing too much information is usually better than providing too little. (On the other hand, be mindful of your team members' time. Over-communicate by providing more pertinent information about the task, not by speaking or writing too much! Keep your written messages short and to the point. If it takes more than a few short sentences to write a question, it would be best discussed in person.)
+
+When working with a team, develop common coding styles and coding practices. Then follow them!
+
+Code Reviews
+Code reviews can be both a great learning and a great teaching experience. Work to make them so!
+
+Code reviews should not take more than 15-20 minutes. This is only possible if the code under review is short. So send code for review often (once per day is not unreasonable). Changed lines should usually be just 100-200 lines and never more than 400. If code reviews on your team are typically longer than this, work with the team to adopt a practice of small code reviews. It will aid productivity tremendously.
+
+When reviewers make comments on your code:
+
+Learn from their comments
+Apply their suggestions across the code under review
+Adopt it in your future coding style
+When performing a review:
+
+Be polite and suggest changes, don't demand them
+Look for bugs, not for stylistic differences
+Look for better ways to implement, but only recommend them if they are truly better, and not just different
+If you see the same thing repeated, comment just once
+Learn from their code, it probably has techniques or styles you haven't considered
+Finally, prioritize code reviews over everything else since during the time a review sits in your inbox, the submitter is likely blocked. Giving it priority unblocks their work, at a small cost to you.
