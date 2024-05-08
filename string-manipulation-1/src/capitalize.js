@@ -1,5 +1,8 @@
 "use strict";
-/* exported capitalize */
 function capitalize(word) {
-    return word.toUpperCase(word[0]);
+    // Convert the word to lowercase
+    const lowerCaseWord = word.toLowerCase();
+    // Capitalize the first character
+    const capitalizedWord = lowerCaseWord.charAt(0).toUpperCase() + lowerCaseWord.slice(1);
+    return capitalizedWord;
 }
