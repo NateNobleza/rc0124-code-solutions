@@ -1,5 +1,10 @@
 "use strict";
 /* exported isUpperCased */
-function capitalize(word) {
-    return string[String.touppercase];
+function isUpperCased(word) {
+    for (let i = 0; i < word.length; i++) {
+        if (word[i] !== word[i].toUpperCase()) {
+            return false; // If any character is not uppercased, return false
+        }
+    }
+    return true; // All characters are uppercased
 }
