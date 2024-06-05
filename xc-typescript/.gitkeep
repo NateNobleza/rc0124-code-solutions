@@ -1,0 +1,102 @@
+TypeScript Popularity
+TypeScript was introduced in 2012 by Microsoft to address many of JavaScript's shortcomings. Google and Facebook also had efforts underway to address the most serious shortcomings, but in 2014 agreed to merge their efforts with TypeScript. Since then, TypeScript has been soaring in popularity.
+
+TypeScript is fully compatible with JavaScript, so that JavaScript programs are also valid TypeScript programs. Because of this, it is easy to gradually add TypeScript to an existing codebase, gaining improvements to the code as TypeScript is adopted. TypeScript's main advantages are the tools it provides for writing more robust JavaScript. These features are especially important for large projects and coordinating between developers, though individual developers working on small projects also benefit. In fact, given its benefits for large code bases, Google recently adopted the policy that all new JavaScript code must be written in TypeScript.
+
+The current implementation of TypeScript uses the tsc compiler that compiles TypeScript code into valid JavaScript, with the ability to target most of the existing standardized versions of JavaScript.
+
+TypeScript continues to evolve at a rapid pace, targeting features to simplify programming or make code more robust.
+
+TypeScript Features
+The TypeScript site tells us that "TypeScript is JavaScript with syntax for types. TypeScript is a strongly typed programming language that builds on JavaScript, giving you better tooling at any scale."
+
+Why are types important? In JavaScript, a variable can be any type — number, string, object, etc. With no indication of what type of data a variable holds, a parameter is expected to receive, or a function returns, it is very easy to pass the wrong data to a function and get unexpected results.
+
+With JavaScript, these type errors can only be caught at runtime. Finding type errors at runtime is time consuming and it is easy to miss errors during testing. The result is bugs that are found by customers. With TypeScript, type errors are found at compile time, or in the IDE while the code is being developed. This makes code much more robust and bugs much less common.
+
+Perhaps the largest source of JavaScript bugs is mishandling undefined or null variables. In JavaScript it is easy to unintentionally pass undefined to a function and programmers frequently fail to account for undefined parameters when implementing functions. TypeScript cleverly defines both undefined and null as separate types, which allows it to detect these types of errors. TS is thus able at compile time to track whether a variable has been defined and whether a potentially-undefined variable is being used incorrectly. This alone eliminates the largest source of JavaScript bugs.
+
+TypeScript makes other clever uses of its typing system. For example, it declares literal strings as types, which lets it check whether the proper string value is being passed to a function. For example, it is common to use a string to determine the state of a component (such as, "loading", "success", or "failure"). By declaring that a function expects to be passed one of these strings, TypeScript can check to make sure the proper value is being passed. This eliminates another large source of JavaScript bugs caused by misspelling literal string values.
+
+One final thing to keep in mind when using TypeScript is that all TypeScript is removed from the code when it is compiled into JavaScript. TypeScript does all its checking at compile time and does not detect runtime failures.
+
+TypeScript Types
+TypeScript uses structural typing. This means that two TypeScript types are compatible if they have the same shape. In most other programming languages (such as Java), type compatibility is determined by nominative type, such as the type name. Structural typing is a very flexible system that allows functions to be reused without worrying about the type naming system. For example, a type named Foo that declares an object with two fields named "name" and "address" is compatible with another type named Bar as long as it also declares an object with two fields named "name" and "address".
+
+TypeScript supports generic types. Generics increase code reuse by allowing you to create a component that can work across many types, not just a single type. The actual type of a generic type is determined by the usage of the component.
+
+In addition to the primitive types (number, string, boolean), TypeScript also supports undefined and null as types and lets you declare literal values (such as 'loading', 'success', 'failure') as types. Object types can also be declared, in which the required and optional fields in an object are declared, along with their types. For example, the type Foo can be declared as an object which has a required name field and an optional address field. TypeScript will ensure that arguments passed to functions declaring a parameter of type Foo will, indeed, contain the name and (optionally) address fields.
+
+TypeScript also supports the type any, to make backward compatibility with existing JavaScript easier. The any type turns off type checking for that variable, parameter, etc. It is convenient while learning TypeScript, but should be avoided as you become more comfortable with TypeScript.
+
+TypeScript types can also be composed using the | and & operators. The | operator declares a "union" type, which indicates that a variable or parameter can be one of several types. (Reading | as "or" makes it easier to understand: number | string means it can be a number or a string.) The & operator declares an "intersection" type, which combines two types into one. (Reading & as "and" makes it easier to understand: Foo & Bar means it contains all the fields in Foo and all the fields in Bar.)
+
+TypeScript Syntax
+TypeScript syntax is straightforward.
+
+To declare a type, use the type keyword, for example:
+
+type Bar = {
+  name: string,
+  address?: string,
+};
+declares a type named Bar that is an object with two fields, name and address. The ? on address indicates that it is optional. That is, an object with only a name field will still match Bar. But if address exists, it must be a string. Note that TypeScript only checks for excess properties when declaring object literals. This is to simplify backward compatibility with existing JavaScript code.
+
+Type declarations can be added to variables, parameters, and function return values.
+
+const axu: Foo = { name: 'Robert' };
+function readBar(a: Foo, b?: number): Bar {}
+declares a variable foo that is of type Foo and a function bar whose first parameter must be of type Foo and whose second parameter is optional, but if present must be a number.
+
+TypeScript uses type inference aggressively. This means that it attempts to determine the type of a variable, parameter, or function return based on the information it has available. Therefore explicitly specifying the type is often not necessary. For example, with the above declarations,
+
+const b = readBar(axu);
+TypeScript can determine that b is of type Bar, so it is not necessary to explicitly specify its type.
+
+Generic types are indicated using < and >. For example, to declare an Array that contains values all of type number, use Array<number>.
+
+Literal types are most often used in union types to indicate that a parameter can take one of several string values. For example,
+
+type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
+function fetchItem(method: HttpMethod, url: string, payload: unknown) {
+  // In this code, we know that `method` will be one of the valid HttpMethod values
+  // `payload`'s type is not known, and TypeScript will not let us use it without first validating its type
+}
+A union type can be used to express the frequent case where a parameter might be undefined, as follows:
+
+function findFoo(name: string): Foo | undefined {
+  // name will be a string and will _not_ be undefined
+  // The function can return undefined if the name is not found.
+  return foos.find((f) => f.name === name);
+}
+
+const f = findFoo('Frank');
+console.log(f.name, f.age);
+// The above code gives a TypeScript error because `f` might be undefined
+// and it is illegal to dereference an undefined variable.
+Occasionally, TypeScript cannot determine the correct type of a variable. The programmer can indicate the correct type using type assertion with the as keyword.
+
+TypeScript Best Practices
+Here are some best practices for using TypeScript, in the extensive experience of the author of this presentation.
+
+Use type inference as much as possible!
+Prefer type over interface (though typescriptlang.org disagrees)
+Do not use enum, instead use literals and |
+Keep types simple in client code; get complex only if writing reusable code
+Let the TS compiler messages and IDE help you!
+Use strict mode
+When you are starting, use any in places where you can't figure out the proper type, but over time, turn on noExplicitAny, which will produce an error if you use any in a type declaration.
+TypeScript is relatively easy to get started with. It is easy to adopt gradually. And it is powerful enough to handle sophisticated programming problems. As you start, pay attention to the error messages and guides in your IDE. However, you are likely to encounter challenging syntax and type issues when using third-party libraries, some of whose typings are less than ideal, and some of which work well but are very complex. Sometimes the error message TypeScript generates can be difficult to chase down. When reading these messages, it is sometimes best to start at the bottom, which identifies the exact problem and is often something quite simple, such as "undefined is not allowed". (The Pretty TypeScript Errors VS Code extension might make it easier.) In the worst case, use a type assertion to assert the proper type, or any if you can't figure it out, so you can move on. After you gain more competence you should be able to come back to those cases and fix them.
+
+const b = bar(f as Foo);
+// or
+const c = bar(g as any);
+Further Reading
+This has been a very brief introduction to TypeScript. There is much more that makes programming in TypeScript a joy. Learn more by reading the TypeScript Handbook, which is well written and easy to learn from.
+
+There are many tutorials available online. One of the best is TypeScript for JS Programmers on the TypeScript Language website. Once you become somewhat familiar with the language, you can practice and hone your skills using TypeScript Exercises, which provides TypeScript challenges along with a live exercise checker that examines your solution and provides hints if it is not correct.
+
+TypeScript Language
+TypeScript for JS Programmers
+TypeScript Exercises
+Pretty TypeScript Errors
